@@ -1,7 +1,60 @@
+import { data_tareas } from "./data.js"; 
+
 function formulario() {
-    let footer = document.createElement("footer")
-    footer.className="form_tareas"
-    return footer
-  }
+    let footer = document.createElement("footer");
+    footer.className = "form_tareas";
+
+   
+
+    const tareas = data_tareas();
+   
+
+    tareas.forEach((tarea, index) => {
+        let div = document.createElement("div");
+        div.className = "div_tareas";
+
+        div.innerHTML = `
+            <input type="checkbox" id="tarea-${index + 1}">
+            <label for="tarea-${index + 1}">${tarea}</label>
+        `;
+
+        footer.appendChild(div);
+
+        
+    });
+
+    return footer;
+}
+
+function crearFormularioTarea() {
+  let div_contenedor=document.createElement("div")
+ div_contenedor.className="contendor_form"
+
+  let form = document.createElement("form");
+  form.className = "form_crear_tarea";
+
   
-  export { formulario }
+  let input = document.createElement("input");
+  input.type = "text";
+  input.placeholder = "Nueva tarea";
+  input.className = "input_tarea";
+
+  
+  let button = document.createElement("button");
+  button.type = "submit";
+  button.textContent = "Agregar";
+  button.className = "boton_agregar";
+
+
+  form.appendChild(input);
+  form.appendChild(button);
+  div_contenedor.appendChild(form)
+ 
+  
+
+  return div_contenedor;
+}
+
+export { crearFormularioTarea };
+
+export { formulario };
