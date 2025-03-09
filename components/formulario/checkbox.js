@@ -8,22 +8,32 @@ export function handleCheckbox(checkbox, label, div) {
         }
     };
 
-    
-    checkbox.addEventListener('change', LabelStyle);
+    // Asegúrate de que el checkbox, label y div existan antes de agregar eventos.
+    if (checkbox && label && div) {
+        // Establecer el estilo al cargar
+        LabelStyle();
 
-    div.addEventListener('click', () => {
-        checkbox.checked = !checkbox.checked;
-        updateLabelStyle();
-    });
+        // Agregar evento de cambio al checkbox
+        checkbox.addEventListener('change', LabelStyle);
 
-   
-    div.addEventListener('mouseover', () => {
-        label.style.textDecoration = "line-through";
-    });
+        // Agregar evento de click al div para cambiar el estado del checkbox
+        div.addEventListener('click', () => {
+            checkbox.checked = !checkbox.checked;
+            LabelStyle();  // Actualizar el estilo
+        });
 
-    div.addEventListener('mouseout', () => {
-        if (!checkbox.checked) {
-            label.style.textDecoration = "none";
-        }
-    });
+        // Agregar evento de mouseover al div
+        div.addEventListener('mouseover', () => {
+            label.style.textDecoration = "line-through";
+        });
+
+       
+        div.addEventListener('mouseout', () => {
+            if (!checkbox.checked) {
+                label.style.textDecoration = "none";
+            }
+        });
+    } else {
+        console.error('Uno o más elementos no están definidos.');
+    }
 }
